@@ -121,7 +121,7 @@
           return error(err);
         } 
         // The return value is a BigNumber object
-        $('#gethighestBid').text(result/(1000000000000000000).toString());
+        $('#gethighestBid').text(result/(1000000000000000000)+" "+"ETH".toString());
       });
     });
     $('#withdraw').click(function (e) {
