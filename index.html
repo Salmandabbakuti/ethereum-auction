@@ -7,7 +7,8 @@
   <div id="band"></div>
   <h2> Auction </h2>
   </br>
-  <h3><marquee behavior="alternate">Get This Beautiful Lamborghini before your Competitor Does..</marquee></h3>
+  <h3><marquee behavior="alternate">Get This Beautiful Lamborghini before your Competitor Gets..</marquee></h3>
+	<h4>Bid Hard<h4>
   <div id="banner">
   <img src="photo.jpg">
   </div>
@@ -18,7 +19,7 @@
 <div style="text-align: center;">
 <button id="withdraw">Withdraw returns</button>
 </div>
-<p>Current Highest Bid:<span id="gethighestBid"></span></p>
+<p>Current Highest Bid:<span id="gethighestBid"></span> ETH</p>
 <p>Current Highest Bidder:<span id="gethighestBidder"></span></p>
 <p> Auction End Time: Friday, January 10, 2020 4:54:49 AM(GMT) :<span id="gettime"></span></p>
 <p>Auction Start :Thursday, January 10, 2019 4:55:45 AM(GMT) :<span id="getauctionStart">??</span></p> 
@@ -120,7 +121,7 @@
           return error(err);
         } 
         // The return value is a BigNumber object
-        $('#gethighestBid').text(result.toString());
+        $('#gethighestBid').text(result/(1000000000000000000).toString());
       });
     });
     $('#withdraw').click(function (e) {
