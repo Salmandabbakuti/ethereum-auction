@@ -30,7 +30,7 @@ button {
   cursor: pointer;
 }
 #bidAmount {
-    width: 200px;
+    width: 150px;
     padding: 10px 12px;
     border: 2px solid rgb(199, 194, 194);
     border-radius: 4px;
