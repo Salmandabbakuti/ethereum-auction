@@ -8,23 +8,31 @@
   <h2> Auction </h2>
   </br>
   <h3><marquee behavior="alternate">Get This Beautiful Lamborghini before your Competitor Gets..</marquee></h3>
-	<h4>Bid Harder..<h4>
+	<h3 style="text-align: center;">Bid Harder..</h3>
   <div id="banner">
   <img src="photo.jpg">
   </div>
    <div style="text-align: center;">
+<p><b>Product Name: </p></b>
+  <span id="getProductName"></span>
+<p><b>Product Description: </p></b>
+  <span id="getProductDescription"></span>
+<p><b>Product Status: </p></b>
+  <span id="getStatus"></span>
+</div>
+ <div style="text-align: center;">
    	<label>Bid Amount</label>
 <input type="number" id="bidAmount" placeholder="100 ether" required />
 <button id="bid">Bid</button>
 <div style="text-align: center;">
 <button id="withdraw">Withdraw returns</button>
+<button type="button" id="endAuction" disabled>End Auction</button>
 </div>
-<p>Current Highest Bid:<span id="gethighestBid"></span></p>
-<p>Current Highest Bidder:<span id="gethighestBidder"></span></p>
-<p> Auction End Time: Friday, January 10, 2020 4:54:49 AM(GMT) :<span id="gettime"></span></p>
-<p>Auction Start :Thursday, January 10, 2019 4:55:45 AM(GMT) :<span id="getauctionStart">??</span></p> 
-<p>Owner: <span id="getowner">??</span></p>
-<p>Beneficiary: <span id="getbeneficiary">??</span></p>
+<p><b>Current Highest Bid:</p></b><span id="gethighestBid"></span>
+<p><b>Current Highest Bidder:</p></b> <span id="gethighestBidder"></span></p>
+<p><b>Auction End Time:</p></b> Thursday, June 6, 2019 8:57:41 AM (GMT) :<span id="gettime"></span>
+<p><b>Auction Started At :</p></b> Wednesday, February 6, 2019 9:51:01 AM (GMT) :<span id="getauctionStart"></span>
+<p><b>Beneficiary:</p></b><span id="getbeneficiary"></span>
 <hr>
 <div id="log"></div>
 </div>
