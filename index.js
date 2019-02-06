@@ -1,4 +1,4 @@
- function log(message) {
+function log(message) {
     $('#log').append($('<p>').text(message));
     $('#log').scrollTop($('#log').prop('scrollHeight'));
   }
@@ -24,18 +24,38 @@
       }
     });
   }
-  const address = "0x42544295c2757e249e937280f76be69e73e999af";
-  const abi =[{"constant":false,"inputs":[],"name":"bid","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"auctionEnd","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"beneficiary","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdraw","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"auctionStart","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"endManually","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"highestBidder","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"biddingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"highestBid","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_biddingTime","type":"uint256"},{"name":"_beneficiary","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"bidder","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"HighestBidIncreased","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"winner","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"AuctionEnded","type":"event"}];
+  const address = "0xDD6910686C1becd8B6e380447856De777cf06c6D";
+  const abi = [{"constant":false,"inputs":[],"name":"bid","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"status","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"auctionEnd","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"beneficiary","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdraw","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"auctionStart","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"endManually","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"productName","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"productDescription","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"highestBidder","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"biddingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"highestBid","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_productName","type":"string"},{"name":"_productDescription","type":"string"},{"name":"_biddingTime","type":"uint256"},{"name":"_beneficiary","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"bidder","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"HighestBidIncreased","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"winner","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"AuctionEnded","type":"event"}];
   $(function () {
     var auction;
-    $('#getowner').click(function (e) {
+     $('#getProductName').click(function (e) {
       e.preventDefault();
-      auction.owner.call(function (err, result) {
+      auction.productName.call(function (err, result) {
         if (err) {
           return error(err);
         } 
         // The return value is a BigNumber object
-        $('#getowner').text(result.toString());
+        $('#getProductName').text(result.toString());
+      });
+    });
+      $('#getProductDescription').click(function (e) {
+      e.preventDefault();
+      auction.productDescription.call(function (err, result) {
+        if (err) {
+          return error(err);
+        } 
+        // The return value is a BigNumber object
+        $('#getProductDescription').text(result.toString());
+      });
+    });
+       $('#getStatus').click(function (e) {
+      e.preventDefault();
+      auction.status.call(function (err, result) {
+        if (err) {
+          return error(err);
+        } 
+        // The return value is a BigNumber object
+        $('#getStatus').text(result.toString());
       });
     });
     $('#gethighestBidder').click(function (e) {
@@ -105,6 +125,22 @@
         });
       });
     });
+     $('#endAuction').click(function (e) {
+      e.preventDefault();
+      if(web3.eth.defaultAccount === undefined) {
+        return error("No accounts found. If you're using MetaMask, " +
+                     "please unlock it first and reload the page.");
+      }
+      log("Transaction On its Way...");
+      auction.auctionEnd.sendTransaction(function (err, hash) {
+        if (err) {
+          return error(err);
+        }
+        waitForReceipt(hash, function () {
+          log("Transaction succeeded.");
+        });
+      });
+    });
     $('#bid').click( function (e) {
       e.preventDefault();
        if(web3.eth.defaultAccount === undefined) {
@@ -139,12 +175,14 @@
       } else {
         log("Connected to the Ropsten test network.");
         auction = web3.eth.contract(abi).at(address);
-        $('#getowner').click();
         $('#getauctionStart').click();
         $('#gethighestBidder').click();
         $('#gettime').click();
         $('#getbeneficiary').click();
         $('#gethighestBid').click();
+        $('#getStatus').click();
+        $('#getProductName').click();
+        $('#getProductDescription').click();
         }
     }
   });
