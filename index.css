@@ -11,14 +11,20 @@ img {
   width: 40%;
   border:1px solid green;
 }
- h2, h4, h3, span {
+ h2, h4, h3 {
     font-family: verdana;
     margin: 0;
     color: green;
     font-weight: bold;
     text-align: center;
 }
-
+span {
+  font-size: 16px;
+   margin: 0;
+   color: green;
+   font-weight: bold;
+  font-family: sans-serif;
+}
 button {
      width: 10%;
   background-color: #4CAF50;
@@ -34,7 +40,7 @@ button {
     padding: 10px 12px;
     border: 2px solid rgb(199, 194, 194);
     border-radius: 4px;
-    margin: 50px;
+    margin: 10px;
     margin-top: 5px;
     margin-bottom: 16px;
     background-color: rgb(216, 210, 210);
