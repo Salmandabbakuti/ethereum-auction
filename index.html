@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
   <title>Auction Dapp</title>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <link rel="stylesheet" href="index.css">
-
 </head>
 <body>
   <div id="band"></div>
@@ -16,26 +14,30 @@
   <img src="photo.jpg">
   </div>
    <div style="text-align: center;">
-<p><b>Product Name: </b>
-  <span id="getProductName"></span></p>
-<p><b>Product Description: </b>
-  <span id="getProductDescription"></span></p>
-<p><b>Product Status: </b>
-  <span id="getStatus"></span></p>
+<p><b>Product Name: </b></p>
+  <span id="getProductName"></span>
+<p><b>Product Description: </b></p>
+  <span id="getProductDescription"></span>
+<p><b>Product Status: </b></p>
+  <span id="getStatus"></span>
+  </br>
 </div>
  <div style="text-align: center;">
-   	<label><b>Bid Amount:</b></label>
+<label><b>Bid Amount:</b></label>
 <input type="number" id="bidAmount" placeholder="Amount In ether" required />
 <button id="bid">Bid</button>
+</div>
 <div style="text-align: center;">
 <button id="withdraw">Withdraw returns</button>
 <button type="button" id="endAuction" disabled>End Auction</button>
-</div>
-<p><b>Current Highest Bid:</b><span id="gethighestBid"></span></p>
-<p><b>Current Highest Bidder:</b> <span id="gethighestBidder"></span></p>
-<p><b>Auction End Time:</b> Thursday, June 6, 2019 8:57:41 AM (GMT) :<span id="gettime"></span></p>
-<p><b>Auction Started At :</b> Wednesday, February 6, 2019 9:51:01 AM (GMT) :<span id="getauctionStart"></span></p>
-<p><b>Beneficiary:</b><span id="getbeneficiary"></span>
+<p><b>Current Highest Bid:</b></p>
+  <span id="gethighestBid"></span>
+<p><b>Current Highest Bidder:</b></p>
+</b> <span id="gethighestBidder"></span>
+<p><b>Auction End Time: <p style="color: green;">Thursday, June 6, 2019 8:57:41 AM (GMT) :</p><span id="gettime"></span></p></b>
+<p><b>Auction Started At :<p style="color: green;">Wednesday, February 6, 2019 9:51:01 AM (GMT) :<span id="getauctionStart"></span></p></b>
+<p><b>Beneficiary:</b></p>
+  <span id="getbeneficiary"></span>
 <hr>
 <div id="log"></div>
 </div>
