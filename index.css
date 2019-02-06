@@ -11,8 +11,8 @@ img {
   width: 40%;
   border:1px solid green;
 }
-h3, h2, h4 {
-    font-family: sans-serif;
+ h2, h4, h3, span {
+    font-family: verdana;
     margin: 0;
     color: green;
     text-align: center;
