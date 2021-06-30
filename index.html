@@ -24,7 +24,7 @@
 </div>
  <div style="text-align: center;">
 <label><b>Bid Amount:</b></label>
-<input type="number" id="bidAmount" placeholder="Amount in ether" required />
+<input type="number" required id="bidAmount" placeholder="Amount in ether" required />
 <button id="bid">Bid</button>
 </div>
 <div style="text-align: center;">
@@ -34,14 +34,16 @@
   <span id="gethighestBid"></span>
 <p><b>Current Highest Bidder:</b></p>
 </b> <span id="gethighestBidder"></span>
-<p><b>Auction End Time: <p style="color: green;">Monday, February 10, 2020 10:10:00 AM (GMT):<span id="gettime"></span></p></b>
-<p><b>Auction Started At :<p style="color: green;">Sunday, February 10, 2019 10:10:31 AM (GMT) :<span id="getauctionStart"></span></p></b>
+<p><b>Auction Started At :<p id="getauctionStart" style="color: green;"></p></b>
+<p><b>Auction Period: <p id="gettime" style="color: green;"></p></b>
 <p><b>Beneficiary:</b></p>
   <span id="getbeneficiary"></span>
 <hr>
 <div id="log"></div>
 </div>
-<script src="web3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.3.4/web3.min.js"
+  integrity="sha512-TTGImODeszogiro9DUvleC9NJVnxO6M0+69nbM3YE9SYcVe4wZp2XYpELtcikuFZO9vjXNPyeoHAhS5DHzX1ZQ=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src = "index.js"></script>
 </body>
