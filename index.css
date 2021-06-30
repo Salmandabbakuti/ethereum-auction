@@ -34,6 +34,9 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
+.error{
+    color: red;
+}
 #bidAmount {
     width: 150px;
     padding: 10px 12px;
