@@ -8,25 +8,32 @@ const address = "0xF70292d59041c6fE3E6Fb79F74b4cf7210Dc37fb";
 const abi = [{ "constant": false, "inputs": [], "name": "bid", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": true, "inputs": [], "name": "status", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "auctionEnd", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "beneficiary", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "withdraw", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "auctionStart", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "endManually", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": true, "inputs": [], "name": "productName", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "productDescription", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "highestBidder", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "biddingTime", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "highestBid", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "inputs": [{ "name": "_productName", "type": "string" }, { "name": "_productDescription", "type": "string" }, { "name": "_biddingTime", "type": "uint256" }, { "name": "_beneficiary", "type": "address" }], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": false, "name": "bidder", "type": "address" }, { "indexed": false, "name": "amount", "type": "uint256" }], "name": "HighestBidIncreased", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "name": "winner", "type": "address" }, { "indexed": false, "name": "amount", "type": "uint256" }], "name": "AuctionEnded", "type": "event" }];
 
 const waitForReceipt = (hash, cb) => {
+  // txn.on('transactionHash', (hash) => {
+  //   log('Transaction submitted successfully. waiting for confirmation')
+  // })
+  //   .on('confirmation', () => {
+  //     log('Transaction Confirmed')
+  //   })
+  //   .on('error', (error) => {
+  //     error('Transaction Failed', error.message)
+  // });
   web3.eth.getTransactionReceipt(hash, (err, receipt) => {
-    if (err) {
-      error(err);
-    }
-    if (receipt !== null) {
-      // Transaction went through
-      if (cb) {
-        cb(receipt);
-      }
-    } else {
+    if (err) return error(err);
+    if (!receipt) {
       // Try again in 1 second
       window.setTimeout(() => {
         waitForReceipt(hash, cb);
       }, 1000);
+    } else {
+      // Transaction went through
+      if (!receipt.status) return error('Transaction Failed: Reverted By EVM')
+      if (cb) cb(receipt);
     }
-  });
+  })
 }
 
 $(() => {
+  //  smartcontract read methods
   $('#getProductName').click((e) => {
     e.preventDefault();
     auction.methods.productName().call((err, result) => {
@@ -79,7 +86,6 @@ $(() => {
       if (err) {
         return error(err.message);
       }
-      console.log($('#getauctionStart').val(), result);
       // converting period in seconds stored in contract to months
       $('#gettime').text(`${Math.ceil(result / 2628002.88)} Months`);
     });
@@ -102,36 +108,27 @@ $(() => {
       $('#gethighestBid').text(result / (1000000000000000000) + " " + "ETH".toString());
     });
   });
+
+  // smartcontract transactions
   $('#withdraw').click((e) => {
     e.preventDefault();
     if (!web3.eth.defaultAccount) {
       return error("No accounts found. If you're using MetaMask, please unlock it first and reload the page.");
     }
-    auction.methods.withdraw().send({ from: web3.eth.defaultAccount })
-      .on('transactionHash', (hash) => {
-        log('Transaction submitted successfully. waiting for confirmation')
-      })
-      .on('receipt', (receipt) => {
-        console.log(receipt)
-      })
-      .on('confirmation', () => {
-        log('Transaction Confirmed')
-      })
-      .on('error', (err) => {
-        error('Transaction Failed:', err.message)
+    auction.methods.withdraw().send({ from: web3.eth.defaultAccount }, (err, hash) => {
+      log('Transaction on its way..')
+      if (err) return error(err.message);
+      waitForReceipt(hash, () => {
+        log("Transaction succeeded.");
       });
+    })
   });
   $('#endAuction').click((e) => {
     e.preventDefault();
-    if (web3.eth.defaultAccount === undefined) {
-      return error("No accounts found. If you're using MetaMask, " +
-        "please unlock it first and reload the page.");
-    }
-    log("Transaction On its Way...");
+    if (!web3.eth.defaultAccount) return error("No accounts found. If you're using MetaMask, please unlock it first and reload the page.");
     auction.methods.auctionEnd.send((err, hash) => {
-      if (err) {
-        return error(err.message);
-      }
+      log("Transaction On its Way...");
+      if (err) return error(err.message);
       waitForReceipt(hash, () => {
         log("Transaction succeeded.");
       });
@@ -139,27 +136,18 @@ $(() => {
   });
   $('#bid').click((e) => {
     e.preventDefault();
-    if (web3.eth.defaultAccount === undefined) {
-      return error("No accounts found. If you're using MetaMask, " +
-        "please unlock it first and reload the page.");
-    }
+    if (!web3.eth.defaultAccount) return error("No accounts found. If you're using MetaMask, please unlock it first and reload the page.");
     const bidTxObject = {
       from: web3.eth.defaultAccount,
       value: web3.utils.toWei(document.getElementById("bidAmount").value, "ether"),
     };
-    auction.methods.bid().send(bidTxObject)
-      .on('transactionHash', (hash) => {
-        log('Transaction submitted successfully. waiting for confirmation')
-      })
-      .on('receipt', (receipt) => {
-        console.log(receipt)
-      })
-      .on('confirmation', () => {
-        log('Transaction Confirmed')
-      })
-      .on('error', (err) => {
-        error('Transaction Failed:', err)
+    auction.methods.bid().send(bidTxObject, (err, hash) => {
+      log("Transaction On its Way...");
+      if (err) return error(err.message);
+      waitForReceipt(hash, () => {
+        log("Transaction succeeded.");
       });
+    })
   });
 
   if (window.ethereum) {

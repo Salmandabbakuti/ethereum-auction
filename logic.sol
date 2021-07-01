@@ -67,7 +67,7 @@ contract SimpleAuction {
   /// End the auction and send the highest bid
   /// to the beneficiary.
   function auctionEnd() public {
-    1. Conditions
+    // 1. Conditions
     if (now <= auctionStart + biddingTime)
       revert(); // auction did not yet end
     if (ended)
