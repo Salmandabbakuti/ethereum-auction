@@ -23,13 +23,13 @@
   </br>
 </div>
  <div style="text-align: center;">
-<label><b>Bid Amount:</b></label>
-<input type="number" required id="bidAmount" placeholder="Amount in ether" required />
-<button id="bid">Bid</button>
+<label><b>Bid Amount*:</b></label>
+<input type="number" id="bidAmount" placeholder="Amount in ether" />
+<button id="bid" disabled>Bid</button>
 </div>
 <div style="text-align: center;">
 <button id="withdraw">Withdraw returns</button>
-<button type="button" id="endAuction" disabled>End Auction</button>
+<button type="button" id="endAuction">End Auction</button>
 <p><b>Current Highest Bid:</b></p>
   <span id="gethighestBid"></span>
 <p><b>Current Highest Bidder:</b></p>
@@ -45,7 +45,15 @@
   integrity="sha512-TTGImODeszogiro9DUvleC9NJVnxO6M0+69nbM3YE9SYcVe4wZp2XYpELtcikuFZO9vjXNPyeoHAhS5DHzX1ZQ=="
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src = "index.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#bid').prop('disabled', true);
+    $('#bidAmount').keyup(function () {
+      $('#bid').prop('disabled', this.value == "" ? true : false);
+    })
+  });
+</script>
+<script src="index.js"></script>
 </body>
 <footer style="text-align: right;">
 <h6>&copy Salman Dabbakuti </h6>

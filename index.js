@@ -4,9 +4,8 @@ const log = (message) => {
 }
 const error = (message) => $('#log').addClass('error').text(message);
 
-const address = "0xF70292d59041c6fE3E6Fb79F74b4cf7210Dc37fb";
-const abi = [{ "constant": false, "inputs": [], "name": "bid", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": true, "inputs": [], "name": "status", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "auctionEnd", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "beneficiary", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "withdraw", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "auctionStart", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "endManually", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": true, "inputs": [], "name": "productName", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "productDescription", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "highestBidder", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "biddingTime", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "highestBid", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "inputs": [{ "name": "_productName", "type": "string" }, { "name": "_productDescription", "type": "string" }, { "name": "_biddingTime", "type": "uint256" }, { "name": "_beneficiary", "type": "address" }], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": false, "name": "bidder", "type": "address" }, { "indexed": false, "name": "amount", "type": "uint256" }], "name": "HighestBidIncreased", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "name": "winner", "type": "address" }, { "indexed": false, "name": "amount", "type": "uint256" }], "name": "AuctionEnded", "type": "event" }];
-
+const address = "0xc1204Df1245C1c809918d13e6493215e4f68f8A7";
+const abi = [{ "inputs": [{ "internalType": "string", "name": "_productName", "type": "string" }, { "internalType": "string", "name": "_productDescription", "type": "string" }, { "internalType": "uint256", "name": "_biddingTime", "type": "uint256" }, { "internalType": "address payable", "name": "_beneficiary", "type": "address" }], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "winner", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "AuctionEnded", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "bidder", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "HighestBidIncreased", "type": "event" }, { "constant": false, "inputs": [], "name": "auctionEnd", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "auctionStart", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "beneficiary", "outputs": [{ "internalType": "address payable", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "bid", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": true, "inputs": [], "name": "biddingTime", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "endManually", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": true, "inputs": [], "name": "highestBid", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "highestBidder", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "productDescription", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "productName", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "status", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "withdraw", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }];
 const waitForReceipt = (hash, cb) => {
   // txn.on('transactionHash', (hash) => {
   //   log('Transaction submitted successfully. waiting for confirmation')
@@ -32,7 +31,7 @@ const waitForReceipt = (hash, cb) => {
   })
 }
 
-$(() => {
+$(document).ready(() => {
   //  smartcontract read methods
   $('#getProductName').click((e) => {
     e.preventDefault();
@@ -126,7 +125,7 @@ $(() => {
   $('#endAuction').click((e) => {
     e.preventDefault();
     if (!web3.eth.defaultAccount) return error("No accounts found. If you're using MetaMask, please unlock it first and reload the page.");
-    auction.methods.auctionEnd.send((err, hash) => {
+    auction.methods.auctionEnd().send({ from: web3.eth.defaultAccount }, (err, hash) => {
       log("Transaction On its Way...");
       if (err) return error(err.message);
       waitForReceipt(hash, () => {
@@ -151,14 +150,16 @@ $(() => {
   });
 
   if (window.ethereum) {
-    web3 = new Web3(web3.currentProvider);
-    ethereum.enable();
-    if (ethereum.networkVersion != 3) return error("Wrong network detected. Please switch to the Ropsten test network.");
-    log("Connected to the Ropsten test network.");
+    web3 = new Web3(ethereum);
+    // ask metamask's permissions to access accounts and set default account
     ethereum.request({ method: 'eth_requestAccounts' }).then((res, err) => {
       if (err) return error(err);
-      web3.eth.defaultAccount = ethereum.selectedAddress;
+      web3.eth.defaultAccount = res[0];
     });
+    // handle network changes
+    ethereum.on('chainChanged', () => window.location.reload());
+    if (ethereum.networkVersion != 3) return error("Wrong network detected. Please switch to the Ropsten test network.");
+    log("Connected to the Ropsten test network.");
     auction = new web3.eth.Contract(abi, address);
     $('#getauctionStart').click();
     $('#gethighestBidder').click();
