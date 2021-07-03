@@ -158,6 +158,9 @@ $(document).ready(() => {
     });
     // handle network changes
     ethereum.on('chainChanged', () => window.location.reload());
+    ethereum.on('accountsChanged', (accounts) => {
+      web3.eth.defaultAccount = accounts[0];
+    });
     if (ethereum.networkVersion != 3) return error("Wrong network detected. Please switch to the Ropsten test network.");
     log("Connected to the Ropsten test network.");
     auction = new web3.eth.Contract(abi, address);
