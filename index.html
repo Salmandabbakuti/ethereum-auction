@@ -1,61 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Auction Dapp</title>
-   <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
   <div id="band"></div>
   <h2> Auction </h2>
   </br>
-  <h3><marquee behavior="alternate">Get This Beautiful Lamborghini before your Competitor Gets..</marquee></h3>
-	<h3 style="text-align: center;">Bid Harder..</h3>
+  <h3>
+    <marquee behavior="alternate">Get This Beautiful Lamborghini before your Competitor Gets..</marquee>
+  </h3>
+  <h3 style="text-align: center;">Bid Harder..</h3>
   <div id="banner">
-  <img src="photo.jpg">
+    <img src="photo.jpg">
   </div>
-   <div style="text-align: center;">
-<p><b>Product Name: </b></p>
-  <span id="getProductName"></span>
-<p><b>Product Description: </b></p>
-  <span id="getProductDescription"></span>
-<p><b>Product Status: </b></p>
-  <span id="getStatus"></span>
-  </br>
-</div>
- <div style="text-align: center;">
-<label><b>Bid Amount*:</b></label>
-<input type="number" id="bidAmount" placeholder="Amount in ether" />
-<button id="bid" disabled>Bid</button>
-</div>
-<div style="text-align: center;">
-<button id="withdraw">Withdraw returns</button>
-<button type="button" id="endAuction">End Auction</button>
-<p><b>Current Highest Bid:</b></p>
-  <span id="gethighestBid"></span>
-<p><b>Current Highest Bidder:</b></p>
-</b> <span id="gethighestBidder"></span>
-<p><b>Auction Started At :<p id="getauctionStart" style="color: green;"></p></b>
-<p><b>Auction Period: <p id="gettime" style="color: green;"></p></b>
-<p><b>Beneficiary:</b></p>
-  <span id="getbeneficiary"></span>
-<hr>
-<div id="log"></div>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.3.4/web3.min.js"
-  integrity="sha512-TTGImODeszogiro9DUvleC9NJVnxO6M0+69nbM3YE9SYcVe4wZp2XYpELtcikuFZO9vjXNPyeoHAhS5DHzX1ZQ=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script>
-  $(document).ready(function () {
-    $('#bid').prop('disabled', true);
-    $('#bidAmount').keyup(function () {
-      $('#bid').prop('disabled', this.value == "" ? true : false);
-    })
-  });
-</script>
-<script src="index.js"></script>
+  <div style="text-align: center;">
+    <p><b>Product Name: </b></p>
+    <span id="getProductName"></span>
+    <p><b>Product Description: </b></p>
+    <span id="getProductDescription"></span>
+    <p><b>Product Status: </b></p>
+    <span id="getStatus"></span>
+    </br>
+  </div>
+  <div style="text-align: center;">
+    <label><b>Bid Amount*:</b></label>
+    <input type="number" id="bidAmount" placeholder="Amount in ether" />
+    <button id="bid" disabled>Bid</button>
+  </div>
+  <div id="getProductDetails" style="text-align: center;">
+    <button id="withdraw">Withdraw returns</button>
+    <button type="button" id="endAuction">End Auction</button>
+    <p><b>Current Highest Bid:</b></p>
+    <span id="getHighestBid"></span>
+    <p><b>Current Highest Bidder:</b></p>
+    </b> <span id="getHighestBidder"></span>
+    <p><b>Auction Started At :</b></p>
+    <span id="getAuctionStartTime" style="color: green;"></span>
+    <p><b>Auction Period:</b></p>
+    <span id="getBiddingTime" style="color: green;"></span>
+    <p><b>Beneficiary:</b></p>
+    <span id="getBeneficiary"></span>
+    <hr>
+    <div id="log"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.3.4/web3.min.js"
+      integrity="sha512-TTGImODeszogiro9DUvleC9NJVnxO6M0+69nbM3YE9SYcVe4wZp2XYpELtcikuFZO9vjXNPyeoHAhS5DHzX1ZQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#bid').prop('disabled', true);
+        $('#bidAmount').keyup(function () {
+          $('#bid').prop('disabled', this.value == "" ? true : false);
+        })
+      });
+    </script>
+    <script src="index.js"></script>
 </body>
 <footer style="text-align: right;">
-<h6>&copy Salman Dabbakuti </h6>
+  <h6>&copy Salman Dabbakuti </h6>
 </footer>
+
 </html>
